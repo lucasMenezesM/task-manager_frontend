@@ -1,0 +1,18 @@
+import { useState } from "react";
+import { Container } from "@mui/material";
+
+import TaskList from "../tasks/components/TaskList";
+import OptionsTabs from "./components/OptionsTabs";
+
+export default function Home() {
+  const [currentTab, setCurrentTab] = useState(0);
+  console.log(currentTab);
+  return (
+    <div>
+      <Container>
+        <OptionsTabs currentTab={currentTab} onSetCurrentTab={setCurrentTab} />
+        {currentTab === 0 && <TaskList />}
+      </Container>
+    </div>
+  );
+}

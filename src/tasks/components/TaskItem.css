@@ -1,0 +1,9 @@
+.task-item__container {
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px gray;
+  transition: all 0.4s;
+  &:hover {
+    transform: scale(1.03);
+  }
+}
