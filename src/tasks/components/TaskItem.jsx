@@ -5,19 +5,20 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import DeleteWarning from "./DeleteWarning";
 
 import "./TaskItem.css";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
-
 export default function TaskItem({ task }) {
+  const [isDeleteWarningOpen, setIsDeleteWarningOpen] = React.useState(false);
+
+  const handleDeleteTask = (taskId) => {
+    setIsDeleteWarningOpen(false);
+    console.log("Deleted " + task.title);
+  };
+
   return (
     <Box sx={{ width: 275 }} className={"task-item__container"}>
       <Card variant="elevation">
@@ -31,7 +32,7 @@ export default function TaskItem({ task }) {
               {task.title}
             </Typography>
             <Typography variant="h5" component="div">
-              be{bull}nev{bull}o{bull}lent
+              {task.title}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {task.description}
@@ -43,10 +44,27 @@ export default function TaskItem({ task }) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Learn More</Button>
+            <Button size="small">Complete</Button>
+            <Button
+              startIcon={<DeleteIcon size="small" />}
+              size="small"
+              variant="outlined"
+              color="error"
+              onClick={() => setIsDeleteWarningOpen(true)}
+            >
+              Delete
+            </Button>
+            <Button size="small" variant="outlined">
+              Edit
+            </Button>
           </CardActions>
         </>
       </Card>
+      <DeleteWarning
+        isDeleteWarningOpen={isDeleteWarningOpen}
+        onSetDeleteWarning={setIsDeleteWarningOpen}
+        onDeleteTask={handleDeleteTask}
+      />
     </Box>
   );
 }
