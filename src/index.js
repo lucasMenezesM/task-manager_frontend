@@ -10,6 +10,7 @@ import Home from "./home/Home";
 import LoginPage from "./users/pages/LoginPage";
 import RegisterPage from "./users/pages/RegisterPage";
 import UsersPage from "./users/pages/UsersPage";
+import NewTask from "./tasks/pages/NewTask";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <UsersPage />,
+      },
+      {
+        path: "/newTask",
+        element: <NewTask />,
       },
     ],
   },

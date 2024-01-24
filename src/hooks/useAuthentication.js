@@ -26,6 +26,7 @@ const useAuthentication = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("authUser"));
     if (userData) {
+      console.log(userData);
       setUserId(userData.userId);
       setToken(userData.token);
       setUser(userData.user);

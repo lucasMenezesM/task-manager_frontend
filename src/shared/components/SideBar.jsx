@@ -300,6 +300,8 @@ export default function MiniDrawer() {
       return navigate("/home");
     }
 
+    if (label === "New Task") navigate("/newTask");
+
     if (label === "Users") return navigate("/users");
   };
 

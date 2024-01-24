@@ -42,7 +42,7 @@ export default function LoginPage() {
             );
 
             console.log(result);
-            login("u1", result.data.token, result.data.user);
+            login(result.data.user.id, result.data.token, result.data.user);
             navigate("/home");
           } catch (err) {
             setError(err.response.data.message || "Something went wrong");

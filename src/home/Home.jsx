@@ -8,7 +8,7 @@ export default function Home() {
   const [currentTab, setCurrentTab] = useState(0);
   return (
     <div>
-      <Container sx={{ mx: 7 }}>
+      <Container sx={{ ml: 7 }}>
         <OptionsTabs currentTab={currentTab} onSetCurrentTab={setCurrentTab} />
         {currentTab === 0 && <TaskList />}
       </Container>

@@ -1,0 +1,42 @@
+.new-task__container {
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+}
+
+.new-task__form {
+  color: white;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 80%;
+  width: 60%;
+}
+
+.new-task__btn {
+  color: var(--main-color);
+  background-color: green;
+
+  &:hover {
+    background-color: var(--main-color) !important;
+    color: white;
+    border: black;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .new-task__form {
+    margin-left: 50px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .new-task__form {
+    margin-left: 40px;
+    width: 90%;
+  }
+}
