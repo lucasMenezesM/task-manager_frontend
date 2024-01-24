@@ -1,9 +1,11 @@
-import { Button, Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Input from "../../shared/components/FormElements/Input";
 
 import "./Authentication.css";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-bootstrap";
 
 export default function RegisterPage() {
   return (
@@ -37,6 +39,15 @@ export default function RegisterPage() {
           >
             Submit Data
           </Button>
+
+          <Typography sx={{ mt: 1 }}>
+            Have an account? Login here{" "}
+            {
+              <Link style={{ color: "white", fontWeight: 800 }} to={"/login"}>
+                Login Page
+              </Link>
+            }
+          </Typography>
         </Form>
       </Formik>
     </Container>
