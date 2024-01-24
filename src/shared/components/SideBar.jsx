@@ -187,7 +187,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { useState } from "react";
 
 import { FaHome } from "react-icons/fa";
 import { CiLogin } from "react-icons/ci";
@@ -198,6 +197,7 @@ import { CgProfile } from "react-icons/cg";
 
 import { useNavigate } from "react-router-dom";
 
+import useAuthentication from "../../hooks/useAuthentication";
 import "./SideBar.css";
 
 const drawerWidth = 240;
@@ -270,9 +270,7 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
-
-  const date = new Date().getTime();
+  const { user, logout } = useAuthentication();
 
   const navigate = useNavigate();
 
@@ -298,6 +296,7 @@ export default function MiniDrawer() {
     }
 
     if (label === "Logout") {
+      logout();
       return navigate("/home");
     }
 
@@ -305,20 +304,21 @@ export default function MiniDrawer() {
   };
 
   let list1;
-  if (loggedIn) {
+
+  if (user) {
     list1 = [
       { label: "Home", icon: <FaHome size={30} /> },
       { label: "Users", icon: <TbUsersGroup size={30} /> },
       { label: "New Task", icon: <FaTasks size={30} /> },
       { label: "My Profile", icon: <CgProfile size={30} /> },
       { label: "Logout", icon: <CiLogout size={30} /> },
-      { label: "Login", icon: <CiLogin size={30} /> },
-      { label: "Register", icon: <MailIcon /> },
     ];
   } else {
     list1 = [
       { label: "Home", icon: <FaHome size={30} /> },
       { label: "Users", icon: <TbUsersGroup size={30} /> },
+      { label: "Login", icon: <CiLogin size={30} /> },
+      { label: "Register", icon: <MailIcon /> },
     ];
   }
 
@@ -345,7 +345,7 @@ export default function MiniDrawer() {
             </Typography>
             <div>
               <Typography variant="h5" noWrap component="div">
-                Welcome, ...
+                {user ? `Welcome, ${user.name}!` : "Welcome"}
               </Typography>
             </div>
           </div>
@@ -396,7 +396,7 @@ export default function MiniDrawer() {
           ))}
         </List>
         <Divider />
-        <List>
+        {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
@@ -419,7 +419,7 @@ export default function MiniDrawer() {
               </ListItemButton>
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Drawer>
     </Box>
   );

@@ -6,7 +6,6 @@ import OptionsTabs from "./components/OptionsTabs";
 
 export default function Home() {
   const [currentTab, setCurrentTab] = useState(0);
-  console.log(currentTab);
   return (
     <div>
       <Container sx={{ mx: 7 }}>

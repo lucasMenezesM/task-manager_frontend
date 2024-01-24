@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
+import useAuthentication from "../../hooks/useAuthentication";
 import "./Authentication.css";
 
 export default function RegisterPage() {
+  const { login } = useAuthentication();
   const [error, setError] = useState(null);
 
   const navigate = useNavigate("/");
@@ -42,7 +44,7 @@ export default function RegisterPage() {
               }
             );
             console.log(result);
-
+            login("u1", result.data.token, result.data.user);
             navigate("/home");
           } catch (err) {
             setError(err.response.data.message || "Something went wrong");
