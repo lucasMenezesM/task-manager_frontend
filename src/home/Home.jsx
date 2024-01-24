@@ -9,7 +9,7 @@ export default function Home() {
   console.log(currentTab);
   return (
     <div>
-      <Container>
+      <Container sx={{ mx: 7 }}>
         <OptionsTabs currentTab={currentTab} onSetCurrentTab={setCurrentTab} />
         {currentTab === 0 && <TaskList />}
       </Container>

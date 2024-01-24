@@ -7,9 +7,9 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./home/Home";
-import RegisterPage from "./shared/pages/RegisterPage";
-import LoginPage from "./shared/pages/LoginPage";
-import Users from "./users/pages/Users";
+import LoginPage from "./users/pages/LoginPage";
+import RegisterPage from "./users/pages/RegisterPage";
+import UsersPage from "./users/pages/UsersPage";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/users",
-        element: <Users />,
+        element: <UsersPage />,
       },
     ],
   },

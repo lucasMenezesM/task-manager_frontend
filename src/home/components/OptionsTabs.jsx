@@ -14,6 +14,7 @@ export default function OptionsTabs({ currentTab, onSetCurrentTab }) {
 
   return (
     <Tabs
+      sx={{ ml: -5 }}
       value={currentTab}
       onChange={handleChange}
       aria-label="icon label tabs example"

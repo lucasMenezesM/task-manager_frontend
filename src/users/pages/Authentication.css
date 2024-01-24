@@ -1,0 +1,22 @@
+.form__page {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  background-color: var(--main-color);
+  color: white;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.form-btn {
+  &:hover {
+    background-color: var(--main-color) !important;
+    color: white;
+  }
+}

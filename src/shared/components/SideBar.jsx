@@ -270,7 +270,7 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const date = new Date().getTime();
 
@@ -290,17 +290,14 @@ export default function MiniDrawer() {
     if (label === "Home") return navigate("/home");
 
     if (label === "Login") {
-      setLoggedIn(true);
       return navigate("/login");
     }
 
     if (label === "Register") {
-      setLoggedIn(true);
       return navigate("/signup");
     }
 
     if (label === "Logout") {
-      setLoggedIn(false);
       return navigate("/home");
     }
 
@@ -315,13 +312,13 @@ export default function MiniDrawer() {
       { label: "New Task", icon: <FaTasks size={30} /> },
       { label: "My Profile", icon: <CgProfile size={30} /> },
       { label: "Logout", icon: <CiLogout size={30} /> },
+      { label: "Login", icon: <CiLogin size={30} /> },
+      { label: "Register", icon: <MailIcon /> },
     ];
   } else {
     list1 = [
       { label: "Home", icon: <FaHome size={30} /> },
       { label: "Users", icon: <TbUsersGroup size={30} /> },
-      { label: "Login", icon: <CiLogin size={30} /> },
-      { label: "Register", icon: <MailIcon /> },
     ];
   }
 
