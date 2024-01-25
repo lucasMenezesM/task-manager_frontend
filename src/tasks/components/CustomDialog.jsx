@@ -11,32 +11,34 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DeleteWarning({
-  isDeleteWarningOpen,
-  onSetDeleteWarning,
-  onDeleteTask,
+export default function CustomDialog({
+  isOpen,
+  onSetDialog,
+  onAction,
+  description,
+  title,
 }) {
   const handleClose = () => {
-    onSetDeleteWarning(false);
+    onSetDialog(false);
   };
 
   return (
     <Dialog
-      open={isDeleteWarningOpen}
+      open={isOpen}
       TransitionComponent={Transition}
       keepMounted
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>{"Delete Task Permanently?"}</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          This action can't be undone.
+          {description}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={onDeleteTask}>Confirm</Button>
+        <Button onClick={onAction}>Confirm</Button>
       </DialogActions>
     </Dialog>
   );

@@ -1,5 +1,4 @@
 .new-task__container {
-  border: 1px solid blue;
   display: flex;
   justify-content: center;
 }

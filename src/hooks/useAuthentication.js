@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useAuthentication = () => {
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
 
   const login = (userId, token, user) => {
     setUserId(userId);
@@ -26,7 +29,6 @@ const useAuthentication = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("authUser"));
     if (userData) {
-      console.log(userData);
       setUserId(userData.userId);
       setToken(userData.token);
       setUser(userData.user);

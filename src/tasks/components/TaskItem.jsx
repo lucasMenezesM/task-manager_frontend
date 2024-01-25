@@ -6,17 +6,36 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
 
-import DeleteWarning from "./DeleteWarning";
+import DeleteWarning from "./CustomDialog";
 
 import "./TaskItem.css";
+import useAuthentication from "../../hooks/useAuthentication";
+import { useNavigate } from "react-router-dom";
+import CustomDialog from "./CustomDialog";
 
 export default function TaskItem({ task }) {
   const [isDeleteWarningOpen, setIsDeleteWarningOpen] = React.useState(false);
 
-  const handleDeleteTask = (taskId) => {
+  const navigate = useNavigate();
+  const { token } = useAuthentication();
+
+  const handleDeleteTask = async () => {
     setIsDeleteWarningOpen(false);
-    console.log("Deleted " + task.title);
+    console.log("task id", task._id);
+    try {
+      const result = await axios.delete(
+        process.env.REACT_APP_API + `/tasks/${task._id}`,
+        { headers: { Authorization: "Bearer " + token } }
+      );
+
+      console.log(result);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(task._id);
   };
 
   return (
@@ -60,10 +79,12 @@ export default function TaskItem({ task }) {
           </CardActions>
         </>
       </Card>
-      <DeleteWarning
-        isDeleteWarningOpen={isDeleteWarningOpen}
-        onSetDeleteWarning={setIsDeleteWarningOpen}
-        onDeleteTask={handleDeleteTask}
+      <CustomDialog
+        isOpen={isDeleteWarningOpen}
+        onSetDialog={setIsDeleteWarningOpen}
+        onAction={handleDeleteTask}
+        title={"Delete this task?"}
+        description={"This action can't be undone."}
       />
     </Box>
   );

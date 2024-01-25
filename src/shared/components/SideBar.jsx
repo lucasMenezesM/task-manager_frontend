@@ -198,6 +198,7 @@ import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 
 import useAuthentication from "../../hooks/useAuthentication";
+import CustomDialog from "../../tasks/components/CustomDialog";
 import "./SideBar.css";
 
 const drawerWidth = 240;
@@ -269,6 +270,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
+  const [isLogOutOpen, setIsLogOutOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const { user, logout } = useAuthentication();
 
@@ -280,6 +282,11 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleLogOut = () => {
+    logout();
+    setIsLogOutOpen(false);
   };
 
   const handleClickSideBar = (label) => {
@@ -295,10 +302,7 @@ export default function MiniDrawer() {
       return navigate("/signup");
     }
 
-    if (label === "Logout") {
-      logout();
-      return navigate("/home");
-    }
+    if (label === "Logout") setIsLogOutOpen(true);
 
     if (label === "New Task") navigate("/newTask");
 
@@ -326,6 +330,14 @@ export default function MiniDrawer() {
 
   return (
     <Box sx={{ display: "flex" }}>
+      <CustomDialog
+        title={"Logout your account?"}
+        description={"You won't be able to create new tasks if logout"}
+        isOpen={isLogOutOpen}
+        onSetDialog={setIsLogOutOpen}
+        onAction={handleLogOut}
+      />
+
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{ bgcolor: "#b197fc" }}>

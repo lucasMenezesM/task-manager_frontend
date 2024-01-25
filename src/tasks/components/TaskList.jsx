@@ -1,4 +1,6 @@
 import TaskItem from "./TaskItem";
+import useGetTasksByUser from "../../hooks/useGetTasksByUser";
+import Skeleton from "@mui/material/Skeleton";
 
 import "./TaskList.css";
 
@@ -20,14 +22,26 @@ const DUMMY_TASKS = [
 ];
 
 export default function TaskList() {
-  if (DUMMY_TASKS.length === 0)
-    return <div>Start creating your daily tasks here!</div>;
+  const { isLoading, tasks, error } = useGetTasksByUser();
+  console.log("tasks: ", tasks);
 
   return (
     <div className="task-list__container ">
-      {DUMMY_TASKS.map((task, index) => (
-        <TaskItem key={index} task={task} />
-      ))}
+      {isLoading ? (
+        Array.from(new Array(10)).map((item, index) => (
+          <Skeleton
+            key={index}
+            variant="rectangular"
+            width={250}
+            height={250}
+            sx={{ margin: 2 }}
+          />
+        ))
+      ) : tasks.length === 0 ? (
+        <div>Start creating your daily tasks here!</div>
+      ) : (
+        tasks.map((task, index) => <TaskItem key={index} task={task} />)
+      )}
     </div>
   );
 }
