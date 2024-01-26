@@ -11,6 +11,8 @@ const useGetTasksByUser = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    if (!user) return;
+
     const getTasks = async () => {
       try {
         setIsLoading(true);

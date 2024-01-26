@@ -48,6 +48,7 @@ export default function NewTask() {
                 "Something went wrong."
             );
             console.log(err);
+            setIsLoading(false);
           }
           setSubmitting(false);
         }}

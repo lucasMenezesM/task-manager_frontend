@@ -100,7 +100,7 @@ import CustomDialog from "./CustomDialog";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./TaskItem.css";
 
-export default function TaskItem({ task }) {
+export default function TaskItem({ task, onCompleteTask }) {
   const [isDeleteWarningOpen, setIsDeleteWarningOpen] = useState(false);
 
   const { token } = useContext(AuthContext);
@@ -134,7 +134,6 @@ export default function TaskItem({ task }) {
     }
     console.log(task._id);
   };
-
   return (
     <div className="task-item__box">
       <h4>{task.title}</h4>
@@ -145,6 +144,7 @@ export default function TaskItem({ task }) {
       </div>
       <div className="task-item__actions">
         <Button
+          onClick={() => onCompleteTask(task._id)}
           sx={{ color: "white", bgcolor: "#69db7c", py: 0.2, px: 0.7, mx: 0.6 }}
           variant="contained"
         >

@@ -14,11 +14,11 @@ export default function Home() {
   const { isLoading, tasks, error } = useGetTasksByUser();
   const { user, isLoggedIn } = useContext(AuthContext);
 
-  if (isLoading) return <SpinnerComponent />;
-
   if (!isLoggedIn) {
     return <InitialPage />;
   }
+
+  if (isLoading) return <SpinnerComponent />;
 
   if (tasks.length === 0) return <EmptyTasks />;
 

@@ -1,0 +1,17 @@
+.tasks-stats__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tasks-stats {
+  text-align: center;
+  margin-top: 45px;
+  /* background-color: #69db7c; */
+  background-color: var(--main-color);
+  color: white;
+  padding-top: 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  width: 70%;
+}

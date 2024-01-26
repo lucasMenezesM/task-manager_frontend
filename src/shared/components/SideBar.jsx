@@ -288,6 +288,7 @@ export default function MiniDrawer() {
 
   const handleLogOut = () => {
     logout();
+    navigate("/home");
     setIsLogOutOpen(false);
   };
 
