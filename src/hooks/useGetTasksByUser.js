@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import useAuthentication from "./useAuthentication";
+import { AuthContext } from "../shared/context/auth-context";
 
 const useGetTasksByUser = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [tasks, setTasks] = useState([]);
 
-  const { userId } = useAuthentication();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const getTasks = async () => {
@@ -15,7 +16,7 @@ const useGetTasksByUser = () => {
         setIsLoading(true);
 
         const result = await axios.get(
-          process.env.REACT_APP_API + `/tasks/${userId}`
+          process.env.REACT_APP_API + `/tasks/${user.id}`
         );
         setTasks(result.data.tasks);
         console.log(result.data);
@@ -27,7 +28,7 @@ const useGetTasksByUser = () => {
     };
 
     getTasks();
-  }, [userId]);
+  }, [user]);
 
   return { isLoading, error, tasks };
 };

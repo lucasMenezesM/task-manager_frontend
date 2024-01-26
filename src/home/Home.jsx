@@ -1,33 +1,31 @@
-import { useState, useEffect, useContext } from "react";
-import { Container } from "@mui/material";
+import { useContext } from "react";
 
+import useGetTasksByUser from "../hooks/useGetTasksByUser";
 import TaskList from "../tasks/components/TaskList";
-import OptionsTabs from "./components/OptionsTabs";
-import useAuthentication from "../hooks/useAuthentication";
 
+import SpinnerComponent from "../shared/components/Spinner";
+import EmptyTasks from "./pages/EmptyTasks";
 import InitialPage from "./pages/InitialPage";
 import "./Home.css";
 import { AuthContext } from "../shared/context/auth-context";
 
 export default function Home() {
-  const [currentTab, setCurrentTab] = useState(0);
   // const { user } = useAuthentication();
+  const { isLoading, tasks, error } = useGetTasksByUser();
   const { user, isLoggedIn } = useContext(AuthContext);
+
+  if (isLoading) return <SpinnerComponent />;
 
   if (!isLoggedIn) {
     return <InitialPage />;
   }
 
+  if (tasks.length === 0) return <EmptyTasks />;
+
   return (
     <div>
       <div className="home__container">
-        <div className="options-tab">
-          <OptionsTabs
-            currentTab={currentTab}
-            onSetCurrentTab={setCurrentTab}
-          />
-        </div>
-        {currentTab === 0 && <TaskList />}
+        <TaskList isLoading={isLoading} tasks={tasks} />
       </div>
     </div>
   );

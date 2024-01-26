@@ -26,6 +26,10 @@
   }
 }
 
+.new-task__form span {
+  margin-right: 5px;
+}
+
 @media screen and (max-width: 670px) {
   .new-task__form {
     margin-left: 50px;

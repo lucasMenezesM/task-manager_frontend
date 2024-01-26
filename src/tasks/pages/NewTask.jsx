@@ -4,6 +4,7 @@ import { Form, Formik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import SpinnerComponent from "../../shared/components/Spinner";
 import Input from "../../shared/components/FormElements/Input";
 import useAuthentication from "../../hooks/useAuthentication";
 
@@ -11,6 +12,7 @@ import "./NewTask.css";
 import { useState } from "react";
 
 export default function NewTask() {
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const { userId, token } = useAuthentication();
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ export default function NewTask() {
         onSubmit={async (values, { setSubmitting }) => {
           console.log(values);
           try {
+            setIsLoading(true);
             const result = await axios.post(
               process.env.REACT_APP_API + "/tasks/",
               {
@@ -36,6 +39,7 @@ export default function NewTask() {
             );
             console.log(result);
 
+            setIsLoading(false);
             navigate("/home");
           } catch (err) {
             setError(
@@ -62,14 +66,14 @@ export default function NewTask() {
             className="new-task__btn"
             variant="contained"
             sx={{
-              width: 150,
+              width: 180,
               bgcolor: "#56da6c",
               color: "white",
               mt: 2,
               fontWeight: 800,
             }}
           >
-            Create Task
+            <span>Create Task</span> {isLoading && <SpinnerComponent />}
           </Button>
 
           {error && (

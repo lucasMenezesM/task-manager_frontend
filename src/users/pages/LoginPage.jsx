@@ -53,6 +53,7 @@ export default function LoginPage() {
           } catch (err) {
             setError(err.response.data.message || "Something went wrong");
             console.log(err);
+            setIsLoading(false);
           }
           setSubmitting(false);
         }}
@@ -73,8 +74,7 @@ export default function LoginPage() {
             variant="contained"
             type="submit"
           >
-            {isLoading && <SpinnerComponent />}
-            <span>LOGIN</span>
+            <span>LOGIN</span> {isLoading && <SpinnerComponent />}
           </Button>
 
           {error && (

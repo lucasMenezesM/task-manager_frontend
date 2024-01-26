@@ -1,6 +1,7 @@
 .home__container {
   max-width: 1200px;
   margin: auto;
+  border: 1px solid red;
 }
 
 @media screen and (max-width: 1270px) {
@@ -18,9 +19,9 @@
   }
 }
 @media screen and (max-width: 515px) {
-  .options-tab {
+  /* .options-tab {
     margin-left: 90px;
-  }
+  } */
 
   .home__container {
     width: 100%;

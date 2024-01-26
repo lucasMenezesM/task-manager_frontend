@@ -1,32 +1,18 @@
+import { useState } from "react";
 import TaskItem from "./TaskItem";
-import useGetTasksByUser from "../../hooks/useGetTasksByUser";
+
 import Skeleton from "@mui/material/Skeleton";
+
+import OptionsTabs from "../../home/components/OptionsTabs";
 
 import "./TaskList.css";
 
-const DUMMY_TASKS = [
-  {
-    title: "a title",
-    description: "A brief description of this task",
-    completed: false,
-    creation_date: new Date(),
-    user_id: "u1",
-  },
-  {
-    title: "a title2 ",
-    description: "A brief description of this task",
-    completed: false,
-    creation_date: new Date(),
-    user_id: "u2",
-  },
-];
-
-export default function TaskList() {
-  const { isLoading, tasks, error } = useGetTasksByUser();
+export default function TaskList({ tasks, isLoading }) {
+  const [currentTab, setCurrentTab] = useState(0);
   console.log("tasks: ", tasks);
 
   return (
-    <div className="task-list__container ">
+    <div className="task-list__page ">
       {isLoading ? (
         Array.from(new Array(10)).map((item, index) => (
           <Skeleton
@@ -37,10 +23,20 @@ export default function TaskList() {
             sx={{ margin: 2 }}
           />
         ))
-      ) : tasks.length === 0 ? (
-        <div>Start creating your daily tasks here!</div>
       ) : (
-        tasks.map((task, index) => <TaskItem key={index} task={task} />)
+        <div className="tasks-list__container">
+          <div className="options-tab">
+            <OptionsTabs
+              currentTab={currentTab}
+              onSetCurrentTab={setCurrentTab}
+            />
+          </div>
+          <div className="tasks-container">
+            {tasks.map((task, index) => (
+              <TaskItem key={index} task={task} />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
