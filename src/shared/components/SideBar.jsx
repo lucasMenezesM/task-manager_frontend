@@ -194,6 +194,7 @@ import { CiLogout } from "react-icons/ci";
 import { TbUsersGroup } from "react-icons/tb";
 import { FaTasks } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { FcAbout } from "react-icons/fc";
 
 import { useNavigate } from "react-router-dom";
 
@@ -310,6 +311,8 @@ export default function MiniDrawer() {
     if (label === "New Task") navigate("/newTask");
 
     if (label === "Users") return navigate("/users");
+
+    if (label === "About the app") return navigate("/about");
   };
 
   let list1;
@@ -321,6 +324,7 @@ export default function MiniDrawer() {
       { label: "New Task", icon: <FaTasks size={30} /> },
       { label: "My Profile", icon: <CgProfile size={30} /> },
       { label: "Logout", icon: <CiLogout size={30} /> },
+      { label: "About the app", icon: <FcAbout size={30} /> },
     ];
   } else {
     list1 = [
@@ -328,6 +332,7 @@ export default function MiniDrawer() {
       { label: "Users", icon: <TbUsersGroup size={30} /> },
       { label: "Login", icon: <CiLogin size={30} /> },
       { label: "Register", icon: <MailIcon /> },
+      { label: "About the app", icon: <FcAbout size={30} /> },
     ];
   }
 
@@ -358,7 +363,7 @@ export default function MiniDrawer() {
           </IconButton>
           <div className="toolbar-text">
             <Typography variant="h5" noWrap component="div">
-              Task Manager
+              SuperTasks Manager
             </Typography>
             <div>
               <Typography variant="h5" noWrap component="div">

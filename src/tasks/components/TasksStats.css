@@ -2,11 +2,12 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
+  margin: 45px 0;
 }
 
 .tasks-stats {
   text-align: center;
-  margin-top: 45px;
   /* background-color: #69db7c; */
   background-color: var(--main-color);
   color: white;

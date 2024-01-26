@@ -1,0 +1,69 @@
+.about-app__container {
+  max-width: 900px;
+
+  margin: 30px auto;
+  font-family: "Nunito", sans-serif;
+}
+
+.about-app__container img {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.about-app__container h2 {
+  font-size: 40px;
+}
+
+.about-app__container h3 {
+  font-size: 30px;
+}
+
+.about-app__container p {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.technologies-list li {
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+.technology-icon {
+  margin-left: 5px;
+}
+
+.social-media li {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1050px) {
+  .about-app__container {
+    margin: 10px 30px 10px 90px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-app__container {
+    margin: 10px 10px 10px 70px;
+  }
+  .about-app__container h2 {
+    font-size: 30px;
+  }
+
+  .about-app__container h3 {
+    font-size: 25px;
+  }
+
+  .about-app__container p {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}

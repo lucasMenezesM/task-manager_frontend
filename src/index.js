@@ -15,6 +15,7 @@ import LoginPage from "./users/pages/LoginPage";
 import RegisterPage from "./users/pages/RegisterPage";
 import UsersPage from "./users/pages/UsersPage";
 import NewTask from "./tasks/pages/NewTask";
+import AboutApp from "./home/pages/AboutApp";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <RegisterPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutApp />,
       },
       {
         path: "/users",
