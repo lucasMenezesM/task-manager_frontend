@@ -7,12 +7,18 @@ import "./App.css";
 import useAuthentication from "./hooks/useAuthentication";
 
 function App() {
-  const { user, login, logout } = useAuthentication();
+  const { user, login, logout, token } = useAuthentication();
 
   return (
     <div className="App">
       <AuthContext.Provider
-        value={{ isLoggedIn: !!user, login: login, logout: logout, user: user }}
+        value={{
+          isLoggedIn: !!user,
+          login: login,
+          logout: logout,
+          user: user,
+          token: token,
+        }}
       >
         <SideBar />
         <main>

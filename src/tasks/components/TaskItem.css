@@ -7,3 +7,36 @@
     transform: scale(1.03);
   }
 }
+
+.task-item__box {
+  width: 300px;
+  border-radius: 5px;
+  background-color: #f8e77a;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-item__box-text {
+  flex-grow: 1;
+}
+
+.task-item__box h4 {
+  border-bottom: 2px solid #9ec9d4;
+}
+
+.task-item__box p {
+  margin-top: 5px;
+  border-bottom: 2px solid #9ec9d4;
+  padding-bottom: 0;
+}
+.task-item__actions {
+  margin-top: 8px;
+}
+
+.task-item__actions button {
+  &:hover {
+    background-color: var(--main-color) !important;
+  }
+}
