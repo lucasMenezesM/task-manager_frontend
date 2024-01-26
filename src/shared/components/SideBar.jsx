@@ -200,6 +200,7 @@ import { useNavigate } from "react-router-dom";
 import useAuthentication from "../../hooks/useAuthentication";
 import CustomDialog from "../../tasks/components/CustomDialog";
 import "./SideBar.css";
+import { AuthContext } from "../context/auth-context";
 
 const drawerWidth = 240;
 
@@ -272,7 +273,8 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [isLogOutOpen, setIsLogOutOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const { user, logout } = useAuthentication();
+  // const { logout } = useAuthentication();
+  const { isLoggedIn, user, logout } = React.useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -311,7 +313,7 @@ export default function MiniDrawer() {
 
   let list1;
 
-  if (user) {
+  if (isLoggedIn) {
     list1 = [
       { label: "Home", icon: <FaHome size={30} /> },
       { label: "Users", icon: <TbUsersGroup size={30} /> },
@@ -359,7 +361,7 @@ export default function MiniDrawer() {
             </Typography>
             <div>
               <Typography variant="h5" noWrap component="div">
-                {user ? `Welcome, ${user.name}!` : "Welcome"}
+                {isLoggedIn ? `Welcome, ${user.name}!` : "Welcome"}
               </Typography>
             </div>
           </div>

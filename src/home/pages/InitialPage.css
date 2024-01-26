@@ -52,7 +52,8 @@
 
 .initial-page__btn {
   &:hover {
-    background-color: var(--main-color);
+    background-color: var(--main-color) !important;
+    text-decoration: underline !important;
   }
 }
 

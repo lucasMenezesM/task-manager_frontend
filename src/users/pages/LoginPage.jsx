@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Container, Typography } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -8,13 +8,17 @@ import Alert from "@mui/material/Alert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import SpinnerComponent from "../../shared/components/Spinner";
 import useAuthentication from "../../hooks/useAuthentication";
 import "./Authentication.css";
+import { AuthContext } from "../../shared/context/auth-context";
 
 export default function LoginPage() {
+  const { login } = useContext(AuthContext);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { login } = useAuthentication();
+  // const { login } = useAuthentication();
   const navigate = useNavigate();
 
   return (
@@ -33,6 +37,7 @@ export default function LoginPage() {
           console.log(values);
 
           try {
+            setIsLoading(true);
             const result = await axios.post(
               process.env.REACT_APP_API + "/users/login",
               {
@@ -43,6 +48,7 @@ export default function LoginPage() {
 
             console.log(result);
             login(result.data.user.id, result.data.token, result.data.user);
+            setIsLoading(false);
             navigate("/home");
           } catch (err) {
             setError(err.response.data.message || "Something went wrong");
@@ -52,6 +58,7 @@ export default function LoginPage() {
         }}
       >
         <Form className="form__container">
+          {/* <CircularProgress color="success" variant="soft" /> */}
           <h2>Login User</h2>
 
           <Input name={"email"} label={"Enter your email"} />
@@ -66,7 +73,8 @@ export default function LoginPage() {
             variant="contained"
             type="submit"
           >
-            Submit Data
+            {isLoading && <SpinnerComponent />}
+            <span>LOGIN</span>
           </Button>
 
           {error && (

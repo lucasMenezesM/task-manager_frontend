@@ -8,12 +8,14 @@ import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import SpinnerComponent from "../../shared/components/Spinner";
 import Input from "../../shared/components/FormElements/Input";
 import useAuthentication from "../../hooks/useAuthentication";
 import "./Authentication.css";
 
 export default function RegisterPage() {
   const { login } = useAuthentication();
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate("/");
@@ -35,6 +37,7 @@ export default function RegisterPage() {
           console.log(values);
 
           try {
+            setIsLoading(true);
             const result = await axios.post(
               process.env.REACT_APP_API + "/users/signup",
               {
@@ -45,6 +48,7 @@ export default function RegisterPage() {
             );
             console.log(result);
             login(result.data.user.id, result.data.token, result.data.user);
+            setIsLoading(false);
             navigate("/home");
           } catch (err) {
             setError(err.response.data.message || "Something went wrong");
@@ -64,7 +68,8 @@ export default function RegisterPage() {
             variant="contained"
             type="submit"
           >
-            Submit Data
+            {isLoading && <SpinnerComponent />}
+            <span>Sign up</span>
           </Button>
 
           {error && (

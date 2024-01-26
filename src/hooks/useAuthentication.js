@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useAuthentication = () => {
@@ -8,7 +8,7 @@ const useAuthentication = () => {
 
   const navigate = useNavigate();
 
-  const login = (userId, token, user) => {
+  const login = useCallback((userId, token, user) => {
     setUserId(userId);
     setToken(token);
     setUser(user);
@@ -17,14 +17,14 @@ const useAuthentication = () => {
       "authUser",
       JSON.stringify({ userId: userId, token: token, user: user })
     );
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUserId(null);
     setToken(null);
     setUser(null);
     localStorage.removeItem("authUser");
-  };
+  }, []);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("authUser"));
@@ -39,3 +39,19 @@ const useAuthentication = () => {
 };
 
 export default useAuthentication;
+
+// const login = useCallback((uid, token, expirationDate) => {
+//   setToken(token);
+//   setUserId(uid);
+//   const tokenExpirationDate =
+//     expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
+//   setTokenExpirationDate(tokenExpirationDate);
+//   localStorage.setItem(
+//     'userData',
+//     JSON.stringify({
+//       userId: uid,
+//       token: token,
+//       expiration: tokenExpirationDate.toISOString()
+//     })
+//   );
+// }, []);

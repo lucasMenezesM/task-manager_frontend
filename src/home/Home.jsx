@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Container } from "@mui/material";
 
 import TaskList from "../tasks/components/TaskList";
@@ -7,12 +7,14 @@ import useAuthentication from "../hooks/useAuthentication";
 
 import InitialPage from "./pages/InitialPage";
 import "./Home.css";
+import { AuthContext } from "../shared/context/auth-context";
 
 export default function Home() {
   const [currentTab, setCurrentTab] = useState(0);
-  const { user } = useAuthentication();
+  // const { user } = useAuthentication();
+  const { user, isLoggedIn } = useContext(AuthContext);
 
-  if (!user) {
+  if (!isLoggedIn) {
     return <InitialPage />;
   }
 
